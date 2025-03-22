@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.27 FATAL_ERROR)
 project(EpochCore VERSION 1.0.0 LANGUAGES CXX)
 
 # Set C++ standard
