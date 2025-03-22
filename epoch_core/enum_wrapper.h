@@ -130,12 +130,12 @@ struct EnumWrapper<EnumClass> { \
 };                                    \
 const EnumClass##Wrapper EnumClass##Instance{}; } \
 
-#define ADD_GLAZE_ENUM(EnumClass, NumType, ...) namespace epoch_core { \
+#define ADD_GLAZE_ENUM(EnumClass, NumType, ...) \
     template <> \
-    struct glz::meta<EnumClass> { \
-        using enum EnumClass; \
+    struct glz::meta<epoch_core::EnumClass> { \
+        using enum epoch_core::EnumClass; \
         static constexpr auto value = enumerate(__VA_ARGS__); \
-    } }                                                            \
+    }                                                           \
 
 #define CREATE_ENUM_COMMON(EnumClass, NumType, ...) \
     CREATE_ENUM_COMMON_CLASS(EnumClass, NumType, __VA_ARGS__); \
@@ -148,6 +148,7 @@ const EnumClass##Wrapper EnumClass##Instance{}; } \
     } \
 
 #define CREATE_ENUM(EnumClass, ...) \
-    CREATE_ENUM_COMMON(EnumClass, uint8_t, __VA_ARGS__); ADD_GLAZE_ENUM(EnumClass, uint8_t, __VA_ARGS__)
+    CREATE_ENUM_COMMON(EnumClass, uint8_t, __VA_ARGS__) \
+    ADD_GLAZE_ENUM(EnumClass, uint8_t, __VA_ARGS__)
 
 #define CREATE_ENUM_SIGNED(EnumClass, ...) CREATE_ENUM_COMMON(EnumClass, int8_t, __VA_ARGS__)
