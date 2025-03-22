@@ -7,8 +7,9 @@
 #include <string>
 #include "error_context.h"
 
-
-namespace epoch {
+// TODO: make_error_context template
+// TODO MAKE_STATUS CODE TEMPLATE ENUM
+namespace epoch_core {
 struct Status {
   bool isOk{true};
   ErrorContext error{};
@@ -33,7 +34,7 @@ template <class T> struct Result {
                           uint32_t const &status = 400) {
     return {Status{false, error, status}};
   }
-};
+};    
 }
 
 #define RETURN_IF_FAILED(status)             if (!status.isOk) return status;

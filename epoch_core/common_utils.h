@@ -30,7 +30,7 @@
 #include <variant>
 
 
-namespace epoch {
+namespace epoch_core {
     template<template<class, class...> class Container, class T, class ... Args>
     std::string toString(Container<T, Args ...> const &x) {
         std::ostringstream ss;

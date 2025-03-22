@@ -7,7 +7,7 @@
 #include <boost/date_time/posix_time/posix_time.hpp>
 
 
-namespace epoch {
+namespace epoch_core {
 struct ErrorContext {
   EpochCoreErrorType error{EpochCoreErrorType::Null};
   std::string message{};  // Detailed error message

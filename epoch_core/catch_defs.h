@@ -11,7 +11,7 @@
 #define FOR_EACH_FLAG(var) for (bool var : { true, false })
 
 
-namespace epoch {
+namespace epoch_core {
 template <bool ordered = true, class ContainerTruth,
           template <class T> class Container, class T>
 inline void VECTOR_EQUALS(ContainerTruth const &trueContainer,

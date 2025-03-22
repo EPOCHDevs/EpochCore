@@ -8,6 +8,7 @@
 #include <array>
 #include <algorithm>
 
+namespace epoch_core {
 // Custom trim functions
 inline std::string_view trim_left(std::string_view sv) {
     sv.remove_prefix(std::min(sv.find_first_not_of(" \t\n\r\f\v"), sv.size()));
@@ -31,7 +32,7 @@ inline std::string_view trim(std::string_view sv) {
 // TODO: Scope and REFACTOR
 
 template <class EnumClass>
-inline auto Parse(std::string_view str) {
+auto Parse(std::string_view str) {
     std::map<EnumClass, std::string> stringEnum;
     std::map<std::string, EnumClass> enumAsString;
 
@@ -106,9 +107,9 @@ protected:
 };
 
 template <class T> struct EnumWrapper;
+}
 
-
-#define CREATE_ENUM_COMMON_CLASS(EnumClass, NumType, ...) \
+#define CREATE_ENUM_COMMON_CLASS(EnumClass, NumType, ...) namespace epoch_core { \
 enum class EnumClass : NumType { __VA_ARGS__, Null }; \
 \
 struct EnumClass##Wrapper: EnumClassT<EnumClass> { \
@@ -127,22 +128,24 @@ template<> \
 struct EnumWrapper<EnumClass> { \
     using type = EnumClass##Wrapper; \
 };                                    \
-const EnumClass##Wrapper EnumClass##Instance{}
+const EnumClass##Wrapper EnumClass##Instance{}; } \
 
-#define ADD_GLAZE_ENUM(EnumClass, NumType, ...) \
+#define ADD_GLAZE_ENUM(EnumClass, NumType, ...) namespace epoch_core { \
     template <> \
     struct glz::meta<EnumClass> { \
         using enum EnumClass; \
         static constexpr auto value = enumerate(__VA_ARGS__); \
-    }                                                            \
+    } }                                                            \
 
 #define CREATE_ENUM_COMMON(EnumClass, NumType, ...) \
     CREATE_ENUM_COMMON_CLASS(EnumClass, NumType, __VA_ARGS__); \
+    namespace epoch_core { \
     inline std::ostream& operator<<(std::ostream& os, EnumClass enumClass) { \
         os << EnumClass##Wrapper::ToString(enumClass); \
         return os; \
     } \
-    inline constexpr bool IsValid(EnumClass const& enumClass) { return enumClass != EnumClass::Null; }
+    inline constexpr bool IsValid(EnumClass const& enumClass) { return enumClass != EnumClass::Null; } \
+    } \
 
 #define CREATE_ENUM(EnumClass, ...) \
     CREATE_ENUM_COMMON(EnumClass, uint8_t, __VA_ARGS__); ADD_GLAZE_ENUM(EnumClass, uint8_t, __VA_ARGS__)
