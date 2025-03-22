@@ -21,4 +21,4 @@ target_include_directories(epoch_core
 
 # Export targets for CPM integration
 set(EPOCH_CORE_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}" CACHE INTERNAL "")
-add_library(EpochCore::epoch_core ALIAS epoch_core)
+add_library(epoch::core ALIAS epoch_core)

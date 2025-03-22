@@ -31,7 +31,7 @@ CPMAddPackage(
 )
 
 # Link your target
-target_link_libraries(your_target PRIVATE EpochCore::epoch_core)
+target_link_libraries(your_target PRIVATE epoch::core)
 ```
 
 ### Option 2: Using the helper file
@@ -45,7 +45,7 @@ Alternatively, you can use the provided helper file:
 include(cmake/EpochCoreCPM.cmake)
 
 # Link your target
-target_link_libraries(your_target PRIVATE EpochCore::epoch_core)
+target_link_libraries(your_target PRIVATE epoch::core)
 ```
 
 ## Available Headers
