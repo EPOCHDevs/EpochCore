@@ -6,7 +6,7 @@
 #include "enum_wrapper.h"
 
 
-CREATE_ENUM(EpochLabErrorType,
+CREATE_ENUM(EpochCoreErrorType,
                    CampaignOperationFailed,
                     CampaignInterrupted,
                     CampaignInvalidState,

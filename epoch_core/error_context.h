@@ -9,7 +9,7 @@
 
 namespace epoch {
 struct ErrorContext {
-  EpochLabErrorType error{EpochLabErrorType::Null};
+  EpochCoreErrorType error{EpochCoreErrorType::Null};
   std::string message{};  // Detailed error message
   std::unordered_map<std::string, std::string> additionalContext{};  // Extra details
   std::string timestamp{boost::posix_time::to_iso_extended_string(

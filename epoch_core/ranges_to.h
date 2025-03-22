@@ -5,7 +5,7 @@
 #include <type_traits>
 #include <vector>
 
-namespace epochlab {
+namespace epoch_core {
 namespace ranges {
 
 // Helper to get the value type of a range
@@ -114,4 +114,4 @@ inline constexpr to_t<Container, Args...> to_v{};
 inline constexpr to_vector_t to_vector_v{};
 
 } // namespace ranges
-} // namespace epochlab
+} // namespace epoch_core
