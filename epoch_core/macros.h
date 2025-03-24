@@ -76,9 +76,9 @@
 
 #define FORMAT_EXCEPTION_MESSAGE(msg) \
     [&]() { \
-        std::stringstream sstr; \
-        sstr << msg << DEBUG_INFO_STR; \
-        return sstr.str(); \
+        std::stringstream sstr_inner; \
+        sstr_inner << msg << DEBUG_INFO_STR; \
+        return sstr_inner.str(); \
     }()
 
 #define ThrowExceptionImpl(ExceptionClass, info_str, ...) \
