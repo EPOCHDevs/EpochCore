@@ -4,6 +4,9 @@
 #include <iterator>
 #include <type_traits>
 #include <vector>
+#include <unordered_set>
+#include <string>
+#include <sstream>
 
 namespace epoch_core {
 namespace ranges {
