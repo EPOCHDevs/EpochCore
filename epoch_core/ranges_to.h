@@ -150,9 +150,9 @@ inline constexpr to_vector_t to_vector_v{};
 
     // Tag struct for to_string pipe syntax
     struct to_string_t {
-        std::string delimiter;
+        const char* delimiter;
 
-        explicit to_string_t(std::string delimiter = "") : delimiter(std::move(delimiter)) {}
+        constexpr explicit to_string_t(const char* delim = "") : delimiter(delim) {}
 
         template<typename Range>
         friend auto operator|(Range&& range, const to_string_t& tag) {
@@ -161,13 +161,12 @@ inline constexpr to_vector_t to_vector_v{};
     };
 
     // Create instance of the to_string tag struct (with empty delimiter by default)
-    inline constexpr to_string_t to_string_v{};
+    inline constexpr to_string_t to_string_v{""};
 
     // Helper function to create a to_string_t with a specific delimiter
-    inline to_string_t with_delimiter(std::string delimiter) {
-        return to_string_t(std::move(delimiter));
+    inline constexpr to_string_t with_delimiter(const char* delimiter) {
+        return to_string_t(delimiter);
     }
-
 
 } // namespace ranges
 } // namespace epoch_core
