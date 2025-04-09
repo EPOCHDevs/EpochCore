@@ -113,5 +113,58 @@ inline constexpr to_t<Container, Args...> to_v{};
 
 inline constexpr to_vector_t to_vector_v{};
 
+    // Convenience to_unordered_set function
+    template<typename Range>
+    auto to_unordered_set(Range&& range) {
+        return to<std::unordered_set<range_value_t<Range>>>(std::forward<Range>(range));
+    }
+
+    // Tag struct for to_unordered_set pipe syntax
+    struct to_unordered_set_t {
+        template<typename Range>
+        friend auto operator|(Range&& range, to_unordered_set_t) {
+            return to_unordered_set(std::forward<Range>(range));
+        }
+    };
+
+    // Create instance of the to_unordered_set tag struct
+    inline constexpr to_unordered_set_t to_unordered_set_v{};
+
+    // Convenience to_string function (joins elements with delimiter)
+    template<typename Range>
+    auto to_string(Range&& range, const std::string& delimiter = "") {
+        std::ostringstream oss;
+        bool first = true;
+        for (auto&& item : range) {
+            if (!first) {
+                oss << delimiter;
+            }
+            oss << item;
+            first = false;
+        }
+        return oss.str();
+    }
+
+    // Tag struct for to_string pipe syntax
+    struct to_string_t {
+        std::string delimiter;
+
+        explicit to_string_t(std::string delimiter = "") : delimiter(std::move(delimiter)) {}
+
+        template<typename Range>
+        friend auto operator|(Range&& range, const to_string_t& tag) {
+            return to_string(std::forward<Range>(range), tag.delimiter);
+        }
+    };
+
+    // Create instance of the to_string tag struct (with empty delimiter by default)
+    inline constexpr to_string_t to_string_v{};
+
+    // Helper function to create a to_string_t with a specific delimiter
+    inline to_string_t with_delimiter(std::string delimiter) {
+        return to_string_t(std::move(delimiter));
+    }
+
+
 } // namespace ranges
 } // namespace epoch_core
