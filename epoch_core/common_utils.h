@@ -26,6 +26,7 @@
 #include <optional>
 #include <random>
 #include <ranges>
+#include <algorithm>
 #include <unordered_map>
 #include <variant>
 
