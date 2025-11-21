@@ -140,7 +140,7 @@ template <class T> struct EnumWrapper;
 #define ADD_GLAZE_ENUM(EnumClass, NumType, ...)                                \
   template <> struct glz::meta<epoch_core::EnumClass> {                        \
     using enum epoch_core::EnumClass;                                          \
-    static constexpr auto value = enumerate(__VA_ARGS__);                      \
+    static constexpr auto value = enumerate(__VA_ARGS__, Null);                \
   }
 
 #define CREATE_ENUM_COMMON(EnumClass, NumType, ...)                            \
